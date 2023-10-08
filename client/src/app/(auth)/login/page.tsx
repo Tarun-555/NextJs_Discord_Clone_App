@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation';
 const Login = () => {
     const navigate = useRouter();
     return (
-        <div className='mt-10 sm:mx-auto sm:w-full sm:max-w-sm'>
+        <div className='mt-10 sm:mx-auto sm:w-full sm:max-w-sm px-6'>
             <form className='flex flex-col gap-6'>
                 <h2 className='font-bold text-xl text-center'>Login</h2>
                 <div className='flex flex-col gap-1'>
@@ -15,6 +15,7 @@ const Login = () => {
                     <Input
                         onChangeHandler={(e) => console.log(e)}
                         customClasses={'w-60'}
+                        inputValue=''
                     />
                 </div>
                 <div className='flex flex-col gap-1 mb-2'>
@@ -22,6 +23,7 @@ const Login = () => {
                     <Input
                         onChangeHandler={(e) => console.log(e)}
                         customClasses={'w-60'}
+                        inputValue=''
                     />
                 </div>
                 <Button

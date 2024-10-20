@@ -1,6 +1,8 @@
+import { MouseEventHandler } from 'react';
+
 interface Props {
     label: string;
-    handleClickHandler: () => void;
+    handleClickHandler: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 const Button = ({ label, handleClickHandler }: Props) => {

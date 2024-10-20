@@ -1,22 +1,31 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Post, Req, Res } from '@nestjs/common';
+import { Request, Response } from 'express';
+import { AuthService } from './auth.service';
 
 @Controller()
 export class AuthController {
-  constructor() {}
+  constructor(private authService: AuthService) {}
 
-  @Post('/signin')
-  async signIn() {
-    return 'sign in';
+  @Post('/login')
+  async login(@Body() payload: any, @Req() req: Request, @Res() res: Response) {
+    const response = await this.authService.handleLogin(payload);
+    return res.status(201).json({ data: response });
+    // return 'sign in';
   }
 
   @Post('/signup')
-  async signInTest(@Body() payload: any) {
+  async signUp(
+    @Body() payload: any,
+    @Req() req: Request,
+    @Res() res: Response,
+  ) {
     console.log('payload', payload);
-    return 'sign in';
+    const response = await this.authService.handleSignup(payload);
+    return res.status(201).json({ data: response });
   }
 
-  @Get('/signup')
-  async signuP() {
-    return 'hey';
-  }
+  // @Get('/signup')
+  // async signUp() {
+  //   return 'hey';
+  // }
 }

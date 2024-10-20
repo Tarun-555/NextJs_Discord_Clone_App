@@ -1,6 +1,6 @@
-import axios from "axios";
+import axios from 'axios';
 
-console.log("env", process.env.NEXT_PUBLIC_API_BASEURL);
+// console.log("env", process.env.NEXT_PUBLIC_API_BASEURL);
 // axios.defaults.baseURL = process.env.NEXT_PUBLIC_API_BASEURL;
 export const Axios = axios.create({
     baseURL: `${process.env.NEXT_PUBLIC_API_BASEURL}`,
@@ -9,7 +9,4 @@ export const Axios = axios.create({
         'Content-Type': 'application/json',
     },
     // withCredentials: true
-})
-
-
-
+});

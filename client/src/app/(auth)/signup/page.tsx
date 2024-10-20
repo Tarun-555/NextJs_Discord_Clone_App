@@ -1,17 +1,17 @@
 'use client';
+import { useEffect, useState } from 'react';
 import Button from '@/components/Button';
 import Input from '@/components/Input';
 import { Axios } from '@/utils/apiService';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { redirect, useRouter } from 'next/navigation';
 
 const Signup = () => {
     const navigate = useRouter();
 
     useEffect(() => {
         console.log(Axios.defaults);
-        const res = Axios.get('/signup');
+        // const res = Axios.get('/signup');
     }, []);
 
     const [signUpFormDetails, setSignupFormDetails] = useState({
@@ -20,9 +20,18 @@ const Signup = () => {
         password: '',
     });
 
-    const handleSignup = () => {
+    const handleSignup = (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault();
         if (signUpFormDetails?.username && signUpFormDetails.email && signUpFormDetails.password) {
-            Axios.post('/signup', signUpFormDetails);
+            console.log('before');
+            Axios.post('/signup', signUpFormDetails).then((res) => {
+                console.log('res after', res);
+                if (res.status == 201) {
+                    console.log('res after2', res);
+                    localStorage.setItem('user', JSON.stringify(res.data.data.userId));
+                    navigate.push('/');
+                }
+            });
         }
     };
 
@@ -74,7 +83,9 @@ const Signup = () => {
                 </div>
                 <Button
                     label='Sign Up'
-                    handleClickHandler={handleSignup}
+                    handleClickHandler={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) =>
+                        handleSignup(e)
+                    }
                 />
             </form>
             <p className='mt-4 italic font-serif'>

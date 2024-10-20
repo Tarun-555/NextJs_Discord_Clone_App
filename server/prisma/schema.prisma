@@ -10,12 +10,12 @@ datasource db {
 model Profile {
   id           String    @id @default(uuid())
   name         String
+  email        String    @unique
+  imageUrl     String
+  userId       String    @unique
   createdAt    DateTime  @default(now())
   hashPassword String
-  email        String
-  imageUrl     String
   updatedAt    DateTime  @default(now())
-  userId       String    @unique
   Channel      Channel[]
   Member       Member[]
   Server       Server[]
